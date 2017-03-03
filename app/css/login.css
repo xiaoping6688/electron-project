@@ -1,0 +1,91 @@
+body{
+  margin: 0;
+  padding: 0;
+  background-color: #FFFFFF;
+  font-family: "微软雅黑";
+}
+
+form{
+  position: absolute;
+  width: 380px;
+  height: 270px;
+  background-color: #FFFFFF;
+  margin: auto;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  text-align: center;
+}
+
+form label{
+  color: #1CA4F1;
+  font-size: 32px;
+}
+
+form input{
+  display: block;
+  width: 244px;
+  height: 38px;
+  border: 1px solid #d6d6d6;
+  font-size: 14px;
+  color: #333333;
+  text-align: left;
+  line-height: 38px;
+  padding-left: 13px;
+  background-color: #FFFFFF;
+  outline: none;
+}
+form input::-webkit-input-placeholder {/* WebKit browsers */
+  font-size: 14px;
+  color: #ababab;
+}
+form input:-moz-placeholder {/* Mozilla Firefox 4 to 18 */
+  font-size: 14px;
+  color: #ababab;
+}
+form input::-moz-placeholder {/* Mozilla Firefox 19+ */
+  font-size: 14px;
+  color: #ababab;
+}
+form input:-ms-input-placeholder {/* Internet Explorer 10+ */
+  font-size: 14px;
+  color: #ababab;
+}
+form input:focus{
+  border-color: #199BF0;
+  outline:none;
+}
+
+form button{
+  cursor: pointer;
+  width: 260px;
+  height: 40px;
+  border: none;
+  font-size: 14px;
+  color: #FFFFFF;
+  text-align: center;
+  line-height: 40px;
+  background-color: #199bf0;
+  outline:none;
+}
+form button:hover{
+  background-color: #1ca4f1;
+}
+
+.username{
+  margin-top: 50px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.password{
+  margin-top: 20px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.login{
+  display: block;
+  margin-top: 30px;
+  margin-left: auto;
+  margin-right: auto;
+}

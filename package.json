@@ -1,0 +1,16 @@
+{
+  "name": "electron-project",
+  "description": "基于Electron的桌面软件开发环境",
+  "private": true,
+  "scripts": {
+    "start": "electron app",
+    "win32": "electron-packager ./app its-master --platform win32 --arch ia32 --out dist/ --icon=./build/favicon.ico --overwrite --download.mirror https://npm.taobao.org/mirrors/electron/ --asar",
+    "win64": "electron-packager ./app its-master --platform win32 --arch x64 --out dist/ --icon=./build/favicon.ico --overwrite --download.mirror https://npm.taobao.org/mirrors/electron/ --asar",
+    "mac": "electron-packager ./app its-master --platform darwin --arch x64 --out dist/ --icon=./build/favicon.icns --overwrite --download.mirror https://npm.taobao.org/mirrors/electron/ --asar",
+    "update": "ncu -u -a"
+  },
+  "devDependencies": {
+    "electron": "^1.6.1",
+    "electron-packager": "^8.5.2"
+  }
+}

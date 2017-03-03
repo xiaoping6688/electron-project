@@ -1,0 +1,7 @@
+{
+  "name": "Electron Client Demo",
+  "version": "1.0.0",
+  "date": "2017-01-12",
+  "changelog": "upgrade",
+  "updateURL": "http://ip/client/Client_1.0.1.exe"
+}

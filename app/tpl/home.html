@@ -1,0 +1,9 @@
+<div class="home">
+  <h1>首页</h1>
+  <ul class="list">
+    {{each list}}
+      <li class="list-item" data-id="{{$value.id}}">{{$value.name}}</li>
+    {{/each}}
+  </ul>
+  <div class="blue-button quit">退出</div>
+</div>
