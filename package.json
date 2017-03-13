@@ -3,6 +3,7 @@
   "description": "基于Electron的桌面软件开发环境",
   "private": true,
   "scripts": {
+    "install": "(cd app && npm install) && (npm install)",
     "start": "electron app",
     "win32": "electron-packager ./app its-master --platform win32 --arch ia32 --out dist/ --icon=./build/favicon.ico --overwrite --download.mirror https://npm.taobao.org/mirrors/electron/ --asar",
     "win64": "electron-packager ./app its-master --platform win32 --arch x64 --out dist/ --icon=./build/favicon.ico --overwrite --download.mirror https://npm.taobao.org/mirrors/electron/ --asar",
