@@ -4,8 +4,8 @@
 
 - 本地构建、方便开发和调试
 - 开发环境和应用分离，便于打包
-- 软件依赖环境自动下载，Inno Setup 打包 exe
-- 软件升级检查
+- 软件依赖环境自动下载，Inno Setup 打包 exe（需要安装InnoSetup软件，项目build编译后运行build/setup-win.iss）
+- 软件升级检查（将upgrade.json文件传至服务器）
 
 
 ## Build Setup
