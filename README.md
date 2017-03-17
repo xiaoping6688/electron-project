@@ -12,7 +12,7 @@
 
 ``` bash
 # install dependencies
-npm install
+npm run installall
 
 # start client for development
 npm start
