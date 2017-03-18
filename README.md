@@ -4,9 +4,9 @@
 
 - 本地构建、方便开发和调试
 - 开发环境和应用分离，便于打包
-- 软件依赖环境自动下载，Inno Setup 打包 exe（需要安装InnoSetup软件，项目build编译后运行build/setup-win.iss）
+- 软件依赖环境自动下载，Inno Setup 打包 exe（build/setup-win.iss）
 - 软件升级检查（将upgrade.json文件传至服务器）
-
+- 支持Mac下打包和运行window软件（brew install wine --devel）
 
 ## Build Setup
 
@@ -29,3 +29,7 @@ npm run mac
 # check update for npm packages, please install 'npm install npm-check-updates -g' at first
 npm run update
 ```
+
+For OS X Users: If you get `Failed to start Cocoa app main loop`, you need to upgrade wine to the latest devel
+
+```brew install wine --devel```

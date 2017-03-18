@@ -6,9 +6,9 @@
 #define MyAppURL "http://www.domain"
 #define MyAppExeName "client.exe"
 #define MyAppPublisher "author"
-#define SourcePath "..\dist\client-win32-ia32"
+#define SourcePath "..\dist\client-win32-x64"
 #define OutputPath "..\dist"
-#define OutputName "client-setup"
+#define OutputName "client-win32-x64"
 
 [Setup]
 ; NOTE: The value of AppId uniquely identifies this application.
