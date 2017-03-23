@@ -8,10 +8,9 @@ template.config('extname', '.html')
 
 var service = require('../js/common/service')
 var popup = require('../js/common/popup')
-var util = require('../js/common/util')
 
 var sharedObject = electron.remote.getGlobal('sharedObject')
-var userInfo = sharedObject.userInfo
+var userInfo = sharedObject.account
 
 var page = null
 
@@ -37,10 +36,5 @@ function onTopMenuNav (id) {
 }
 
 function logout() {
-  // var args = {
-  //   "user_id": userInfo.uid,
-  // }
-  // service.call(service.LOGOUT_API, args, 'POST')
-
   ipcRenderer.send('logout')
 }

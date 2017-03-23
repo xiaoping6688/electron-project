@@ -21,10 +21,14 @@ const UPGRADE_CHECK_URL = 'http://ip/client/release.json'
 // be closed automatically when the JavaScript object is garbage collected.
 let mainWindow
 
-// 共享数据
-global.sharedObject = {
-  userInfo: {}
+// 初始化共享数据
+function initStore () {
+  global.sharedObject = {
+    account: {}
+  }
 }
+
+initStore()
 
 // 使应用在同一时刻最多只会有一个实例
 const shouldQuit = app.makeSingleInstance((commandLine, workingDirectory) => {
@@ -47,16 +51,18 @@ function createWindow () {
   // Create the main browser window.
   var electronScreen = electron.screen
   var size = electronScreen.getPrimaryDisplay().size
+
   mainWindow = new BrowserWindow({
     width: size.width,
     height: size.height,
     // alwaysOnTop: true,
     // fullscreen: true,
-    backgroundColor: '#FFFFFF',
-    title: '教师端'
+    // frame: false,
+    // transparent: true,
+    // backgroundColor: '#FFFFFF'
   })
 
-  // and load the index.html of the app.
+  // and load the login.html of the app.
   mainWindow.loadURL(url.format({
     pathname: path.join(__dirname, 'html/login.html'),
     protocol: 'file',
@@ -68,8 +74,8 @@ function createWindow () {
     // Dereference the window object, usually you would store windows
     // in an array if your app supports multi windows, this is the time
     // when you should delete the corresponding element.
-    mainWindow = null
-    // app.quit()
+    // mainWindow = null
+    app.quit()
   })
 
   // Mac系统下，默认的快捷键Redo、Undo、复制粘贴等不能使用，需要通过创建应用菜单的方式做一个映射。
@@ -122,10 +128,13 @@ function createWindow () {
 
     // Open the DevTools.
     globalShortcut.register('control+alt+i', function() {
-      if (mainWindow.webContents.isDevToolsOpened()) {
-        mainWindow.webContents.closeDevTools()
+      let win = BrowserWindow.getFocusedWindow()
+      if (!(win && win.webContents)) return
+
+      if (win.webContents.isDevToolsOpened()) {
+        win.webContents.closeDevTools()
       } else {
-        mainWindow.webContents.openDevTools()
+        win.webContents.openDevTools()
       }
     })
   }
@@ -158,6 +167,8 @@ app.on('activate', function () {
   }
 })
 
+
+// listen child process events
 ipcMain.on('loadMain', function (event, args) {
   mainWindow.loadURL(url.format({
     pathname: path.join(__dirname, 'html/main.html'),
@@ -166,9 +177,21 @@ ipcMain.on('loadMain', function (event, args) {
   }))
 })
 
+function showMain () {
+  // mainWindow.show()
+  mainWindow.restore()
+}
+ipcMain.on('showMain', showMain)
+
+function hideMain () {
+  // mainWindow.hide()
+  mainWindow.minimize()
+}
+ipcMain.on('hideMain', hideMain)
+
 ipcMain.on('logout', function (event, args) {
-  global.sharedObject.userInfo = {}
-  global.sharedObject.classInfo = {}
+  initStore()
+  showMain()
 
   mainWindow.loadURL(url.format({
     pathname: path.join(__dirname, 'html/login.html'),
@@ -176,6 +199,7 @@ ipcMain.on('logout', function (event, args) {
     slashes: true
   }))
 })
+
 
 // check update for windows system
 if (process.platform === 'win32') {

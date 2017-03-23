@@ -6,21 +6,29 @@ var sharedObject = electron.remote.getGlobal('sharedObject')
 
 $('form').on('submit', function(){
   var username = $('.username').val().trim()
-  var password = $('.password').val()
+  var password = $('.username').val()
 
-  // var args = {
-  //   class_room_id: username,
-  //   class_type: 2
-  // }
-  // service.call(service.LOGIN_API, args, 'POST', function (ret) {
-  //   if (ret.rlt === 'true') {
-  //     sharedObject.user = ret.data
-  //     ipcRenderer.send('loadMain')
-  //   } else {
-  //     alert(ret.message)
-  //   }
-  // }, function(){
-  //   alert('网络异常，请稍后再试！')
-  // })
-  ipcRenderer.send('loadMain')
+  if (username && password) {
+    var args = {
+      username: username,
+      password: password
+    }
+
+    service.call(service.LOGIN_API, args, 'POST', function (ret) {
+      if (ret.rlt === 'true') {
+        if (!ret.data) {
+          alert('数据异常！')
+          return
+        }
+
+        sharedObject.account = ret.data
+        ipcRenderer.send('loadMain')
+      } else {
+        alert(ret.msg)
+      }
+    }, function() {
+      alert('网络异常，请稍后再试！')
+    })
+  }
+
 })

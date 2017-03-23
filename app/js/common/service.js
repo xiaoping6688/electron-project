@@ -4,15 +4,12 @@
 "use strict"
 
 var electron = require('electron')
-var md5 = require('blueimp-md5')
-var userInfo = electron.remote.getGlobal('sharedObject').userInfo
-
-const SECRET_KEY = 'yoursecretkey'
+var userInfo = electron.remote.getGlobal('sharedObject').account
 
 const BASE_URL = 'http://ip/api'
 
-exports.LOGIN_API = BASE_URL + "/user/login" // 登录接口
-exports.LOGOUT_API = BASE_URL + "/user/logout" // 退出登录接口
+// exports.LOGIN_API = BASE_URL + "/user/login" // 登录接口
+exports.LOGIN_API = "../../api/login"
 
 const REQUEST_TIMEOUT = 10000 // 请求超时时间（毫秒） TODO 出错重试
 
@@ -28,9 +25,6 @@ const REQUEST_TIMEOUT = 10000 // 请求超时时间（毫秒） TODO 出错重�
 exports.call = function(api, args, method, onSuccess, onError) {
   console.log("[Request] " + api + " method: " + method + " args: " + JSON.stringify(args));
 
-  var timestamp = new Date().getTime()
-  var signature = generateSig(method.split('/').pop(), timestamp)
-
   return $.ajax({
     url: api,
     type: method,
@@ -38,16 +32,10 @@ exports.call = function(api, args, method, onSuccess, onError) {
     dataType: "json",
     async: true,
     headers: {
-      'timestamp': timestamp,
-      'signature': signature,
       'token': userInfo.token
     },
-    // contentType: "application/x-www-form-urlencoded; charset=UTF-8",
     contentType: "application/json",
     timeout: REQUEST_TIMEOUT,
-    beforeSend: function(request) {
-      //request.setRequestHeader("key", "value");
-    },
     success: function(data){
       console.log("[Response] " + api + "\n" + JSON.stringify(data))
       if (typeof(onSuccess) === 'function'){
@@ -61,9 +49,4 @@ exports.call = function(api, args, method, onSuccess, onError) {
       }
     }
   })
-}
-
-function generateSig (method, timestamp) {
-  var str = SECRET_KEY + method + timestamp
-  return md5(str)
 }
