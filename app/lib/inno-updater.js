@@ -78,12 +78,12 @@ updater.downloadAndInstall = function(releaseJSON){
            this.emit('done');
          }).pipe(req.stream).on('finish',()=>{
            this.emit('update-downloaded', releaseJSON,path.resolve(directory,filename));
-           this.emit('done');           
+           this.emit('done');
          });
     }).catch((e)=>{
       if(e.message === 'file is done') {
         this.emit('update-downloaded', releaseJSON,path.resolve(directory,filename));
-        this.emit('done');                   
+        this.emit('done');
       }
     });
 }
@@ -101,7 +101,7 @@ updater.checkForUpdates = function(isForce){
       throw new Error('invalid status code: ' + res.statusCode)
     }
 
-    const releaseJSON = JSON.parse(res.body);
+    const releaseJSON = JSON.parse(res.body)[process.env.NODE_ENV];
     if (res.statusCode == 204 || (!isForce &&semver.gte(app.getVersion(),releaseJSON.version))) {
       this.emit('update-not-available')
       return Promise.reject(errCancel)

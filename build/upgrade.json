@@ -1,7 +1,23 @@
 {
-  "name": "Electron Client Demo",
-  "version": "1.0.0",
-  "date": "2017-01-12",
-  "changelog": "upgrade",
-  "updateURL": "http://ip/client/Client_1.0.1.exe"
+  "development": {
+    "name": "Electron Client Demo",
+    "version": "1.0.1",
+    "date": "2017-04-17",
+    "changelog": "upgrade",
+    "updateURL": "http://ip/dev/client-1.0.1.exe"
+  },
+  "simulation": {
+    "name": "Electron Client Demo",
+    "version": "1.0.1",
+    "date": "2017-04-17",
+    "changelog": "upgrade",
+    "updateURL": "http://ip/simu/client-1.0.1.exe"
+  },
+  "production": {
+    "name": "Electron Client Demo",
+    "version": "1.0.1",
+    "date": "2017-04-17",
+    "changelog": "upgrade",
+    "updateURL": "http://ip/prod/client-1.0.1.exe"
+  }
 }
