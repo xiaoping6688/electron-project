@@ -6,13 +6,16 @@
     <link rel="stylesheet" href="../css/login.css" />
   </head>
 
-  <body>
+  <body style="-webkit-app-region: drag">
+    <div class="syslog"></div>
     <form onsubmit="return false;">
       <label>Electron Client Deom</label>
       <input class="username" type="text" maxlength="60" placeholder="账号" required autofocus>
       <input class="password" type="password" maxlength="30" placeholder="密码" required>
       <button class="login" type="submit">登录</button>
     </form>
+
+    <div class="sys-version"></div>
 
     <script>
       window.$ = window.jQuery = require("../lib/jquery.min.js")

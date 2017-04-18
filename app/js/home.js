@@ -15,6 +15,7 @@ function init () {
 
   $('.home .quit').click(function(){
     $('#page').html('')
+    logout()
   })
 }
 

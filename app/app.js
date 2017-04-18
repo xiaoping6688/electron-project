@@ -15,7 +15,12 @@ const autoupdater = require('./lib/inno-updater')
 const path = require('path')
 const url = require('url')
 
-const UPGRADE_CHECK_URL = 'http://ip/client/release.json'
+// 初始化Node环境
+const env = require('./env')
+process.env.NODE_ENV = env.NODE_ENV
+const UPGRADE_CHECK_URL = env.UPDATE_URI
+
+console.log('env: ' + process.env.NODE_ENV)
 
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
@@ -50,16 +55,19 @@ if (shouldQuit) {
 function createWindow () {
   // Create the main browser window.
   var electronScreen = electron.screen
-  var size = electronScreen.getPrimaryDisplay().size
+  var size = electronScreen.getPrimaryDisplay().workAreaSize
 
   mainWindow = new BrowserWindow({
     width: size.width,
     height: size.height,
+    // fullscreen: true, // 全屏时mac下不能透明？
     // alwaysOnTop: true,
-    // fullscreen: true,
-    // frame: false,
-    // transparent: true,
-    // backgroundColor: '#FFFFFF'
+    // resizable: false,
+
+    // 透明无边框窗口
+    transparent: true,
+    titleBarStyle: 'hidden', // for mac
+    frame: false
   })
 
   // and load the login.html of the app.
@@ -179,7 +187,9 @@ ipcMain.on('loadMain', function (event, args) {
 
 function showMain () {
   // mainWindow.show()
-  mainWindow.restore()
+  if (mainWindow.isMinimized()) {
+    mainWindow.restore()
+  }
 }
 ipcMain.on('showMain', showMain)
 
@@ -235,8 +245,18 @@ autoupdater.on('update-available', function(releasefileJSON, next){
 })
 
 autoupdater.on('progress',function(progress){
-  console.log("INFO: Loading " + progress.percentage * 100 + "%")
+  // console.log("INFO: Loading " + progress.percentage * 100 + "%")
+  mainWindow.webContents.send('syslog', "正在下载新版本 " + Math.round(progress.percentage * 100) + "%")
 })
+
+
+
+// Node全局异常捕获
+process.on('uncaughtException', function (err) {
+  console.error('An uncaught error occurred!')
+  console.error(err.stack)
+  // Recommend: restart the client
+});
 
 // In this file you can include the rest of your app's specific main process
 // code. You can also put them in separate files and require them here.

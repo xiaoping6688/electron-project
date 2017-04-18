@@ -8,20 +8,20 @@
 - 软件升级检查（将upgrade.json文件传至服务器）
 - 支持Mac下打包和运行window软件（brew install wine --devel）
 
-## Build Setup
+## Build Setup  @see package.json#scripts
 
 ``` bash
-# install dependencies
+# install dependencies (npm install -g cnpm --registry=https://registry.npm.taobao.org)
 npm run installall
 
 # start client for development
 npm start
 
 # build for production with win32
-npm run win32
+npm run win32:dev/simu/prod
 
 # build for production with win64
-npm run win64
+npm run win64:dev/simu/prod
 
 # build for production with mac
 npm run mac

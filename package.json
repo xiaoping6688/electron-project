@@ -3,17 +3,22 @@
   "description": "基于Electron的桌面软件开发环境",
   "private": true,
   "scripts": {
-    "installall": "(npm install) && (cd app && npm install)",
-    "start": "electron app",
-    "win32": "gulp build32",
-    "win64": "gulp build64",
-    "mac": "electron-packager ./app client --platform darwin --arch x64 --out dist/ --icon ./build/favicon.icns --overwrite --download.mirror https://npm.taobao.org/mirrors/electron/ --asar",
+    "installall": "(cnpm install) && (cd app && cnpm install)",
+    "start": "cross-env NODE_ENV=development gulp dev",
+    "win32:dev": "cross-env NODE_ENV=development gulp build32",
+    "win32:simu": "cross-env NODE_ENV=simulation gulp build32",
+    "win32:prod": "cross-env NODE_ENV=production gulp build32",
+    "win64:dev": "cross-env NODE_ENV=development gulp build64",
+    "win64:simu": "cross-env NODE_ENV=simulation gulp build64",
+    "win64:prod": "cross-env NODE_ENV=production gulp build64",
     "update": "ncu -u -a"
   },
   "devDependencies": {
-    "electron": "^1.6.1",
-    "electron-packager": "^8.5.2",
+    "cross-env": "^4.0.0",
+    "electron": "^1.4.16",
+    "electron-packager": "^8.6.0",
     "gulp": "^3.9.1",
-    "gulp-inno": "^0.1.0"
+    "gulp-inno": "^0.1.0",
+    "gulp-rename": "^1.2.2"
   }
 }

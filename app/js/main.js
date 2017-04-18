@@ -38,3 +38,26 @@ function onTopMenuNav (id) {
 function logout() {
   ipcRenderer.send('logout')
 }
+
+ipcRenderer.on('syslog', function (event, message) {
+  $('.syslog').html(message)
+})
+
+/**
+ * JS 拦截/捕捉 全局错误
+ * @param {String}  errorMessage   错误信息
+ * @param {String}  scriptURI      出错的文件
+ * @param {Long}    lineNumber     出错代码的行号
+ * @param {Long}    columnNumber   出错代码的列号
+ * @param {Object}  errorObj       错误的详细信息，Anything
+ */
+window.onerror = function (errorMessage, scriptURI, lineNumber, columnNumber, errorObj) {
+    var info = "错误信息：" + errorMessage + "\n" +
+      "出错文件：" + scriptURI + "\n" +
+      "出错行号：" + lineNumber + "\n" +
+      "出错列号：" + columnNumber + "\n" +
+      "错误详情：" + errorObj + "\n\n";
+
+    console.log(info);
+    return true;
+}
