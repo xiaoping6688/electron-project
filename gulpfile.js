@@ -26,7 +26,7 @@ gulp.task('build64', ['env'], function(cb){
     if (err) return cb(err)
 
     gulp
-      .src('./build/setup.iss')
+      .src('./build/setup-win.iss')
       .pipe(replace('${version}', config.version))
       .pipe(replace('${sourcePath}', 'client-win32-x64'))
       .pipe(replace('${outputName}', 'client-win64-' + config.version + '-' + getShortName(process.env.NODE_ENV)))
@@ -41,7 +41,7 @@ gulp.task('build32', ['env'], function(cb){
     if (err) return cb(err)
 
     gulp
-      .src('./build/setup.iss')
+      .src('./build/setup-win.iss')
       .pipe(replace('${version}', config.version))
       .pipe(replace('${sourcePath}', 'client-win32-ia32'))
       .pipe(replace('${outputName}', 'client-win32-' + config.version + '-' + getShortName(process.env.NODE_ENV)))
