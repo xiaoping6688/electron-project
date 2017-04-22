@@ -5,6 +5,12 @@
   "scripts": {
     "installall": "(cnpm install) && (cd app && cnpm install)",
     "start": "cross-env NODE_ENV=development gulp dev",
+    "pack32:dev": "cross-env NODE_ENV=development gulp pack32",
+    "pack32:simu": "cross-env NODE_ENV=simulation gulp pack32",
+    "pack32:prod": "cross-env NODE_ENV=production gulp pack32",
+    "pack64:dev": "cross-env NODE_ENV=development gulp pack64",
+    "pack64:simu": "cross-env NODE_ENV=simulation gulp pack64",
+    "pack64:prod": "cross-env NODE_ENV=production gulp pack64",
     "win32:dev": "cross-env NODE_ENV=development gulp build32",
     "win32:simu": "cross-env NODE_ENV=simulation gulp build32",
     "win32:prod": "cross-env NODE_ENV=production gulp build32",
