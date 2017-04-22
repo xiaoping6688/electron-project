@@ -17,6 +17,9 @@
     "win64:dev": "cross-env NODE_ENV=development gulp build64",
     "win64:simu": "cross-env NODE_ENV=simulation gulp build64",
     "win64:prod": "cross-env NODE_ENV=production gulp build64",
+    "mac:dev": "cross-env NODE_ENV=development gulp mac",
+    "mac:simu": "cross-env NODE_ENV=simulation gulp mac",
+    "mac:prod": "cross-env NODE_ENV=production gulp mac",
     "update": "ncu -u -a"
   },
   "devDependencies": {
@@ -24,6 +27,7 @@
     "electron": "^1.4.16",
     "electron-packager": "^8.6.0",
     "gulp": "^3.9.1",
+    "gulp-bom": "^1.0.0",
     "gulp-inno": "^0.1.0",
     "gulp-rename": "^1.2.2",
     "gulp-replace": "^0.5.4"

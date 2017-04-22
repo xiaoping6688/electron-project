@@ -24,7 +24,7 @@ npm run win32:dev/simu/prod
 npm run win64:dev/simu/prod
 
 # build for production with mac
-npm run mac
+npm run mac:dev/simu/prod
 
 # check update for npm packages, please install 'npm install npm-check-updates -g' at first
 npm run update
@@ -33,3 +33,5 @@ npm run update
 For OS X Users: If you get `Failed to start Cocoa app main loop`, you need to upgrade wine to the latest devel
 
 ```brew install wine --devel```
+
+注：目前通过‘npm run win64’等自动编译的软件不支持中文名（setup-win.iss -> MyAppName），可通过‘npm run pack64’等先打包再运行dist/iss文件启动InnoSetup-Unicode手动编译。

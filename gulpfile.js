@@ -2,7 +2,7 @@ const gulp = require('gulp')
 const inno = require('gulp-inno')
 const rename = require("gulp-rename")
 const replace = require('gulp-replace')
-// const convert = require('gulp-convert-encoding')
+const bom = require('gulp-bom')
 const exec = require('child_process').exec
 const config = require('./app/package.json')
 // var argv = process.argv.slice(2)
@@ -22,13 +22,20 @@ gulp.task('dev', ['env'], function(cb){
   })
 })
 
+gulp.task('mac', ['env'], function(cb){
+  exec('electron-packager ./app client --platform darwin --arch x64 --out dist/ --icon ./build/favicon.icns --overwrite --download.mirror https://npm.taobao.org/mirrors/electron/ --asar', function(err) {
+    if (err) return cb(err)
+    cb()
+  })
+})
+
 gulp.task('pack64', ['env'], function(cb){
   exec('electron-packager ./app client --platform=win32 --arch=x64 --out=dist/ --icon=./build/favicon.ico --overwrite --download.mirror=https://npm.taobao.org/mirrors/electron/ --asar', function(err) {
     if (err) return cb(err)
 
     gulp
       .src('./build/setup-win.iss')
-      // .pipe(convert({to: 'GBK'}))
+      .pipe(bom())
       .pipe(replace('${version}', config.version))
       .pipe(replace('${sourcePath}', 'client-win32-x64'))
       .pipe(replace('${outputName}', 'client-win64-' + config.version + '-' + getShortName(process.env.NODE_ENV)))
@@ -53,7 +60,7 @@ gulp.task('pack32', ['env'], function(cb){
 
     gulp
       .src('./build/setup-win.iss')
-      // .pipe(convert({to: 'GBK'}))
+      .pipe(bom())
       .pipe(replace('${version}', config.version))
       .pipe(replace('${sourcePath}', 'client-win32-ia32'))
       .pipe(replace('${outputName}', 'client-win32-' + config.version + '-' + getShortName(process.env.NODE_ENV)))
