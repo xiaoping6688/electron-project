@@ -34,7 +34,7 @@ var ajax = {
     return $.ajax({
       url: api,
       type: method,
-      data: args ? JSON.stringify(args) : null,
+      data: $.isEmptyObject(args) ? null : JSON.stringify(args),
       dataType: 'json',
       async: true,
       headers: {},
