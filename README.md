@@ -4,9 +4,11 @@
 
 - 本地构建、方便开发和调试
 - 开发环境和应用分离，便于打包
-- 软件依赖环境自动下载，Inno Setup 打包 exe（build/setup-win.iss）
-- 软件升级检查（将upgrade.json文件传至服务器）
-- 支持Mac下打包和运行window软件（brew install wine --devel）
+- ~~软件依赖环境自动下载，nno Setup 打包 exe（build/setup-win.iss）~~
+- ~~软件升级检查（将upgrade.json文件传至服务器）~~
+- ~~支持Mac下打包和运行window软件（brew install wine --devel）~~
+
+**注:** 上面使用Inno打包方式已经过时，请使用'electron-updater'实现客户端升级功能，热更新请参考[Electron 在线热升级方案](http://www.hdwong.com/2018/03/25/742.html)
 
 ## Build Setup  @see package.json#scripts
 
